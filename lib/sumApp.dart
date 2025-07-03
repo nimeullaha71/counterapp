@@ -25,8 +25,35 @@ import 'package:flutter/material.dart';
 // }
 
 class SumAppUI extends State<MyHomePage> {
+
+  Map<String,double>FormValues={
+    "Num1" : 0,
+    "Num2" : 0,
+    "Num3" : 0,
+  };
+  double sum =0;
+
   @override
   Widget build(BuildContext context) {
+
+
+    MyInputOnChange(InputKey,InputValue){
+        setState(() {
+          FormValues.update(InputKey, (value)=>double.parse(InputValue));
+        });
+    }
+
+
+    AddAllNumber(){
+      setState(() {
+        sum=FormValues['Num1']!+FormValues['Num2']!+FormValues['Num3']!;
+      });
+
+
+    }
+
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Add"),
@@ -35,17 +62,25 @@ class SumAppUI extends State<MyHomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text("Sum is=0",style: HeadTextStyle(),),
-          TextFormField(decoration: AppInputStyle("First Number"),),
+          Text(sum.toString(),style: HeadTextStyle(),),
+          TextFormField(onChanged: (value){
+            MyInputOnChange("Num1",value);
+          }, decoration: AppInputStyle("First Number"),),
           SizedBox(height: 10,),
-          TextFormField(decoration: AppInputStyle("Second Number")),
+          TextFormField(onChanged: (value){
+            MyInputOnChange("Num2",value);
+          },decoration: AppInputStyle("Second Number")),
+          SizedBox(height: 10,),
+          TextFormField(onChanged: (value){
+            MyInputOnChange("Num3",value);
+          },decoration: AppInputStyle("Third Number")),
           SizedBox(height: 10,),
           Container(
             width: double.infinity,
             child: ElevatedButton(
                 style: AppButtonStyle(),
                 onPressed: (){
-
+                  AddAllNumber();
             }, child: Text("ADD")),
           )
         ],
