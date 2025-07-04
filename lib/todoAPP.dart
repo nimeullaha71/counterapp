@@ -10,7 +10,27 @@ class ToDoApp extends StatefulWidget {
 
 class _ToDoAppState extends State<ToDoApp> {
   
-  List todoList = [{"1:1"}];
+  List todoList = [];
+  String item = "";
+
+
+  MyInputOnChange(content){
+    setState(() {
+      item= content;
+    });
+  }
+  AddItem(){
+    setState(() {
+      todoList.add({"item":item});
+    });
+  }
+
+  RemoveItem(index){
+    setState(() {
+      todoList.removeAt(index);
+    });
+  }
+
   
   @override
   Widget build(BuildContext context) {
@@ -26,10 +46,10 @@ class _ToDoAppState extends State<ToDoApp> {
                 flex: 10,
                   child: Row(
                     children: [
-                      Expanded(flex : 70,child: TextFormField(decoration: AppInputStyle("List Item"),)),
+                      Expanded(flex : 70,child: TextFormField(onChanged:(content){MyInputOnChange(content);},decoration: AppInputStyle("List Item"),)),
                       SizedBox(width: 10,),
 
-                      Expanded(flex: 30, child: Padding(padding: EdgeInsets.only(left: 5), child: ElevatedButton(onPressed: (){}, child: Text("Add Button"),style: AppButtonStyle(),),),),
+                      Expanded(flex: 30, child: Padding(padding: EdgeInsets.only(left: 5), child: ElevatedButton(onPressed: (){AddItem();}, child: Text("Add Button"),style: AppButtonStyle(),),),),
                     ],
                   )),
               Expanded(
@@ -40,10 +60,10 @@ class _ToDoAppState extends State<ToDoApp> {
                       return Card(
                         child: SizeBox50(Row(
                           children: [
-                            Expanded(flex : 80,child: Text("Item")),
+                            Expanded(flex : 80,child: Text(todoList[index]["item"].toString())),
                             SizedBox(width: 10,),
 
-                            Expanded(flex: 20, child: TextButton(onPressed: (){}, child: Icon(Icons.delete))),
+                            Expanded(flex: 20, child: TextButton(onPressed: (){RemoveItem(index);}, child: Icon(Icons.delete))),
                           ],
                         )),
                       );
