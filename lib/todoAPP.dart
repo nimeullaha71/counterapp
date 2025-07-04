@@ -63,6 +63,7 @@ class _ToDoAppState extends State<ToDoApp> {
                             Expanded(flex : 80,child: Text(todoList[index]["item"].toString())),
                             SizedBox(width: 10,),
 
+
                             Expanded(flex: 20, child: TextButton(onPressed: (){RemoveItem(index);}, child: Icon(Icons.delete))),
                           ],
                         )),
