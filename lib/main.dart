@@ -2,6 +2,8 @@ import 'package:counterapp/sumApp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'todoAPP.dart';
+
 void main(){
   runApp(MyApp());
 }
@@ -10,8 +12,9 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Counter App",
-      home: MyHomePage(),
+      title: "To Do APP",
+      theme: ThemeData(primaryColor: Colors.green),
+      home: ToDoApp(),
     );
   }
 }
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget{
 class MyHomePage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    return SumAppUI();
+    return MyHomePageUI();
   }
 }
 
